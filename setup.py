@@ -8,6 +8,11 @@ try:
 except ImportError:
     npy_include = None
 
+try:
+    from Cython.Distutils import build_ext
+except ImportError:
+    from setuptools.command.build_ext import build_ext
+
 from setuptools import setup, find_packages, Extension
 
 if os.environ.get('USER','') == 'vagrant':
