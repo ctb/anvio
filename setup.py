@@ -4,15 +4,9 @@ import glob
 
 try:
     import numpy
+    npy_include = numpy.get_include()
 except ImportError:
-    print "You need to have numpy installed on your system to run setup.py. Sorry!"
-    sys.exit()
-
-try:
-    from Cython.Distutils import build_ext
-except ImportError:
-    print "You need to have Cython installed on your system to run setup.py. Sorry!"
-    sys.exit()
+    npy_include = None
 
 from setuptools import setup, find_packages, Extension
 
@@ -24,7 +18,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
 
-include_dirs_for_concoct = [numpy.get_include(), '/opt/local/include/']
+include_dirs_for_concoct = [npy_include, '/opt/local/include/']
 
 setup(
     name = "anvio",
